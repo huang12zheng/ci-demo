@@ -23,25 +23,25 @@ jobs:
     strategy:
       matrix:
         container:
-        - name: bionic
-          ## switch by job 'Build and publish image', and make it to
-          ## RUN /root/scripts/${SCRIPT}
-          script: apt_install_x86_64.sh
+        # - name: bionic
+        #   ## switch by job 'Build and publish image', and make it to
+        #   ## RUN /root/scripts/${SCRIPT}
+        #   script: apt_install_x86_64.sh
         - name: bionic-x86
           dockerfile: bionic
           base: multiarch/ubuntu-core:x86
           qemu: true
           script: apt_install_x86_64.sh
-        - name: bionic-arm32
-          dockerfile: bionic
-          base: multiarch/ubuntu-core:armhf-bionic
-          qemu: true
-          script: apt_install_arm.sh
-        - name: bionic-arm64
-          dockerfile: bionic
-          base: multiarch/ubuntu-core:arm64-bionic
-          qemu: true
-          script: apt_install_arm.sh
+        # - name: bionic-arm32
+        #   dockerfile: bionic
+        #   base: multiarch/ubuntu-core:armhf-bionic
+        #   qemu: true
+        #   script: apt_install_arm.sh
+        # - name: bionic-arm64
+        #   dockerfile: bionic
+        #   base: multiarch/ubuntu-core:arm64-bionic
+        #   qemu: true
+        #   script: apt_install_arm.sh
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
