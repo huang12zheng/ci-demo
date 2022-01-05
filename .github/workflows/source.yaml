@@ -29,7 +29,7 @@ jobs:
         #   script: apt_install_x86_64.sh
         - name: bionic-x86
           dockerfile: bionic
-          base: multiarch/ubuntu-core:x86
+          base: multiarch/ubuntu-core:x86-bionic
           qemu: true
           script: apt_install_x86_64.sh
         # - name: bionic-arm32
