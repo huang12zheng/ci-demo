@@ -1,0 +1,5 @@
+ARG BASE=ubuntu:bionic
+ARG SCRIPT=apt_install_arm.sh
+FROM ${BASE} AS apt
+COPY ci/scripts/ /root/scripts/
+RUN /root/scripts/${SCRIPT}
