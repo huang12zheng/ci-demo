@@ -23,17 +23,17 @@ jobs:
     strategy:
       matrix:
         container:
-        - name: bionic
+        - name: bionic-webrtc
           dockerfile: bionic
-        - name: bionic-x86
+        - name: bionic-x86-webrtc
           dockerfile: bionic
           base: multiarch/ubuntu-core:x86-bionic
           qemu: true
-        - name: bionic-arm32
+        - name: bionic-arm32-webrtc
           dockerfile: bionic-arm
           base: multiarch/ubuntu-core:armhf-bionic
           qemu: true
-        - name: bionic-arm64
+        - name: bionic-arm64-webrtc
           dockerfile: bionic-arm
           base: multiarch/ubuntu-core:arm64-bionic
           qemu: true
