@@ -107,6 +107,7 @@ jobs:
     #     export PATH=${PATH}:./depot_tools
     #   if: matrix.platform.os == 'macOS-11.0'
     - run: |
+        export PATH=${PATH}:./depot_tools
         git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
         depot_tools/gclient
         depot_tools/fetch --no-history --nohooks webrtc
@@ -134,6 +135,7 @@ jobs:
         fi
       shell: bash
     - name: ios build
-      run: ../build/ios.sh
+      run: |
+        ../build/ios.sh
       working-directory: webrtc
       if: ${{ matrix.platform.os_type }} = ios
