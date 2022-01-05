@@ -63,9 +63,10 @@ jobs:
     - name: Build and publish image
       run: |
         if [ "${{ matrix.container.base }}" != "" ]; then
-          BASE_ARG="--build-arg BASE=${{ matrix.container.base }} SCRIPT=${{ matrix.container.script }}"
+          BASE_ARG="--build-arg BASE=${{ matrix.container.base }}"
+          SCRIPT_ARG="--build-arg SCRIPT=${{ matrix.container.script }}"
         fi
-        docker build -t ${{ env.docker-registry-container-sha }} ${BASE_ARG} -f ${{ env.dockerfile }} .
+        docker build -t ${{ env.docker-registry-container-sha }} ${BASE_ARG} ${SCRIPT_ARG} -f ${{ env.dockerfile }} .
         docker push ${{ env.docker-registry-container-sha }}
       working-directory: ${{ env.docker-config-path }}
       if: github.event_name != 'pull_request' && env.docker-container-exists != 'true'
