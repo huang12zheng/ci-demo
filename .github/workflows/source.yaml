@@ -64,9 +64,8 @@ jobs:
       run: |
         if [ "${{ matrix.container.base }}" != "" ]; then
           BASE_ARG="--build-arg BASE=${{ matrix.container.base }}"
-          SCRIPT_ARG="--build-arg SCRIPT=${{ matrix.container.script }}"
         fi
-        docker build -t ${{ env.docker-registry-container-sha }} ${BASE_ARG} ${SCRIPT_ARG} -f ${{ env.dockerfile }} .
+        docker build -t ${{ env.docker-registry-container-sha }} ${BASE_ARG} -f ${{ env.dockerfile }} bash -c "/root/scripts/${matrix.container.script}"
         docker push ${{ env.docker-registry-container-sha }}
       working-directory: ${{ env.ci-config-path }}
       if: github.event_name != 'pull_request' && env.docker-container-exists != 'true'
