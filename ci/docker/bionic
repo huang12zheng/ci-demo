@@ -1,6 +1,5 @@
 ARG BASE=ubuntu:bionic
-ARG SCRIPT=apt_install_x86_64.sh
 FROM ${BASE} AS apt
+ARG SCRIPT=apt_install_x86_64.sh
 COPY scripts/ /root/scripts/
-RUN ls /root/scripts
-RUN /root/scripts/apt_install_x86_64.sh
+RUN /root/scripts/{SCRIPT}.sh
