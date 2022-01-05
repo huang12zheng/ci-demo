@@ -69,17 +69,17 @@ jobs:
         docker push ${{ env.docker-registry-container-sha }}
       working-directory: ${{ env.docker-config-path }}
       if: github.event_name != 'pull_request' && env.docker-container-exists != 'true'
-  get_dep:
-    strategy:
-      matrix:
-        platform:
-        - os: windows-latest
-        - os: macOS-11.0
-        - os: ubuntu-20.04
-    runs-on: ${{ matrix.platform.os }}
-    steps:
-    - run: |
-        git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-        export PATH=${PATH}:./depot_tools
-        gclient
-        fetch --no-history --nohooks webrtc
+  # get_dep:
+  #   strategy:
+  #     matrix:
+  #       platform:
+  #       - os: windows-latest
+  #       - os: macOS-11.0
+  #       - os: ubuntu-20.04
+  #   runs-on: ${{ matrix.platform.os }}
+  #   steps:
+  #   - run: |
+  #       git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+  #       export PATH=${PATH}:./depot_tools
+  #       gclient
+  #       fetch --no-history --nohooks webrtc
