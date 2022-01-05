@@ -25,18 +25,18 @@ jobs:
         container:
         - name: bionic-webrtc
           dockerfile: bionic
-        - name: bionic-x86-webrtc
-          dockerfile: bionic
-          base: multiarch/ubuntu-core:x86-bionic
-          qemu: true
-        - name: bionic-arm32-webrtc
-          dockerfile: bionic-arm
-          base: multiarch/ubuntu-core:armhf-bionic
-          qemu: true
-        - name: bionic-arm64-webrtc
-          dockerfile: bionic-arm
-          base: multiarch/ubuntu-core:arm64-bionic
-          qemu: true
+        # - name: bionic-x86-webrtc
+        #   dockerfile: bionic
+        #   base: multiarch/ubuntu-core:x86-bionic
+        #   qemu: true
+        # - name: bionic-arm32-webrtc
+        #   dockerfile: bionic-arm
+        #   base: multiarch/ubuntu-core:armhf-bionic
+        #   qemu: true
+        # - name: bionic-arm64-webrtc
+        #   dockerfile: bionic-arm
+        #   base: multiarch/ubuntu-core:arm64-bionic
+        #   qemu: true
     runs-on: ubuntu-latest
     steps:
     - name: Check out repository
@@ -64,17 +64,17 @@ jobs:
         docker push ${{ env.docker-registry-container-sha }}
       working-directory: ${{ env.ci-config-path }}
       if: github.event_name != 'pull_request' && env.docker-container-exists != 'true'
-  # get_dep:
-  #   strategy:
-  #     matrix:
-  #       platform:
-  #       - os: windows-latest
-  #       - os: macOS-11.0
-  #       - os: ubuntu-20.04
-  #   runs-on: ${{ matrix.platform.os }}
-  #   steps:
-  #   - run: |
-  #       git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-  #       export PATH=${PATH}:./depot_tools
-  #       gclient
-  #       fetch --no-history --nohooks webrtc
+  get_dep:
+    strategy:
+      matrix:
+        platform:
+        - os: windows-latest
+        # - os: macOS-11.0
+        # - os: ubuntu-20.04
+    runs-on: ${{ matrix.platform.os }}
+    steps:
+    - run: |
+        git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+        export PATH=${PATH}:./depot_tools
+        gclient
+        fetch --no-history --nohooks webrtc
