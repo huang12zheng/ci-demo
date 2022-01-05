@@ -42,3 +42,4 @@ sed -e 's/Apt::Get::AllowUnauthenticated=true/Apt::Get::AllowUnauthenticated=tru
 add-apt-repository -y ppa:ubuntu-toolchain-r/test
 apt update
 apt-get install -y --only-upgrade libstdc++6
+apt-get install -y openjdk-11-jdk

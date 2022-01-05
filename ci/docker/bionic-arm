@@ -2,3 +2,4 @@ ARG BASE=ubuntu:bionic
 FROM ${BASE} AS apt
 COPY scripts/ /root/scripts/
 RUN /root/scripts/apt_install_arm.sh
+RUN /root/scripts/get_dep.sh
