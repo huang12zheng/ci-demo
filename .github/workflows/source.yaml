@@ -77,10 +77,10 @@ jobs:
         git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
     - run: |
         set path=%path%;%cd%/depot_tools
-      if: matrix.platform.os == windows-latest
+      if: matrix.platform.os == 'windows-latest'
     - run: |
         export PATH=${PATH}:./depot_tools
-      if: matrix.platform.os == macOS-11.0
+      if: matrix.platform.os == 'macOS-11.0'
     - run: |
         gclient
         fetch --no-history --nohooks webrtc
