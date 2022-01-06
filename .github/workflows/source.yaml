@@ -150,8 +150,7 @@ jobs:
         export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
 
         if [ -n "${{ matrix.platform.container.name }}" ]; then
-          docker run \
-          ${{ env.docker-registry-container-sha }} \
+          docker run ${{ env.docker-registry-container-sha }} \
           /bin/bash -c "cd webrtc/src && ../../build/${{matrix.platform.os_type}}.sh"
         else
           /bin/bash -c "cd webrtc/src && ../../build/${{matrix.platform.os_type}}.sh"
