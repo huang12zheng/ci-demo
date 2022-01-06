@@ -50,7 +50,7 @@ jobs:
   #     if: matrix.container.qemu == true
   #   - name: Download existing container
   #     run: |
-  #       "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.container.name }}" docker/"${{ matrix.container.dockerfile }}"
+  #       "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.container.name }}" "docker/${{ matrix.container.dockerfile }}"
   #     env:
   #       DOCKER_REGISTRY: ${{ env.docker-registry }}
   #       GITHUB_TOKEN: ${{ secrets.github_token }}
@@ -147,7 +147,7 @@ jobs:
       shell: bash
     - name: Download container
       run: |
-        "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" docker/"${{ matrix.platform.container.dockerfile }}"
+        "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "docker/${{ matrix.platform.container.dockerfile }}"
       env:
         DOCKER_REGISTRY: ${{ env.docker-registry }}
         GITHUB_TOKEN: ${{ secrets.github_token }}
