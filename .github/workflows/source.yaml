@@ -147,6 +147,7 @@ jobs:
       shell: bash
     - name: Download container
       run: |
+        pwd
         "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "docker/${{ matrix.platform.container.dockerfile }}"
       env:
         DOCKER_REGISTRY: ${{ env.docker-registry }}
