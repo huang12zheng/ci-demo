@@ -102,8 +102,8 @@ jobs:
         #   os: macOS-11.0
         # - os: macOS-11.0
         #   os_type: max-x64
-        # - os_type: win-x64
-        #   os: windows-latest
+        - os_type: win-x64
+          os: windows-latest
         # - os_type: win-x86
         #   os: windows-latest
         # - container:
