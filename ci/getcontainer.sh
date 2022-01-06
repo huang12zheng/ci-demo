@@ -32,10 +32,7 @@ echo "docker-registry-container=${DOCKER_REGISTRY_CONTAINER}" >> $GITHUB_ENV
 DOCKER_SHA=$(git log -1 --pretty=format:"%h" -- "${DOCKERFILE_PATH}")
 echo "docker-sha=${DOCKER_SHA}" >> $GITHUB_ENV
 
-if [ -z "DOCKER_SHA" ]; then
-SPLIT=":"
-fi
-DOCKER_REGISTRY_CONTAINER_SHA="${DOCKER_REGISTRY_CONTAINER}${SPLIT}${DOCKER_SHA}"
+DOCKER_REGISTRY_CONTAINER_SHA="${DOCKER_REGISTRY_CONTAINER}:${DOCKER_SHA}"
 
 echo "docker-registry-container-sha=${DOCKER_REGISTRY_CONTAINER_SHA}" >> $GITHUB_ENV
 echo "docker-registry-container-latest=${DOCKER_REGISTRY_CONTAINER}:latest" >> $GITHUB_ENV

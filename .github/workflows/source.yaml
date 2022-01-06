@@ -73,6 +73,7 @@ jobs:
           container:
             name: bionic-webrtc
           os: ubuntu-latest
+          dockerfile: bionic
         # - os_type: ios-arm
         #   os: macOS-11.0
         #  os: ubuntu-latest
@@ -89,12 +90,15 @@ jobs:
         # - os_type: linux-arm
         #   container:
         #     name: bionic-arm32-webrtc
+        #   dockerfile: bionic-arm
         # - os_type: linux-arm64
         #   container:
         #     name: bionic-arm64-webrtc
+        #   dockerfile: bionic-arm
         # - os_type: linux-x64
         #   container:
         #     name: bionic-webrtc
+        #   dockerfile: bionic
         # - os_type: linux-x86
         #   container:
         #     name: bionic-x86-webrtc
@@ -148,14 +152,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.github_token }}
       working-directory: ${{ env.docker-config-path }}
       if: matrix.platform.container.name != ''
-    - name: Build and test
-      run: |
-        export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
-        set +x
-        if [ -n "${{ matrix.platform.container.name }}" ]; then
-          docker run ${{ env.docker-registry-container-sha }} \
-          /bin/bash -c "cd src && /root/build/${{matrix.platform.os_type}}.sh"
-        else
-          cd src && ../ci/build/${{matrix.platform.os_type}}.sh
-        fi
-      shell: bash
+    # - name: Build and test
+    #   run: |
+    #     export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
+    #     set +x
+    #     if [ -n "${{ matrix.platform.container.name }}" ]; then
+    #       docker run ${{ env.docker-registry-container-sha }} \
+    #       /bin/bash -c "cd src && /root/build/${{matrix.platform.os_type}}.sh"
+    #     else
+    #       cd src && ../ci/build/${{matrix.platform.os_type}}.sh
+    #     fi
+    #   shell: bash
