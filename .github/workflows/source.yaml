@@ -84,8 +84,8 @@ jobs:
         #   os: ubuntu-latest
         # - os_type: ios-x64-sim
         #   os: macOS-11.0
-        # - os_type: ios
-        #   os: macOS-11.0
+        - os_type: ios
+          os: macOS-11.0
         # - os_type: linux-arm
         #   container:
         #     name: bionic-arm32-webrtc
@@ -132,33 +132,30 @@ jobs:
     - name: det source if not in container
       run: |
         # ci/scripts/get_dep.sh
-        set +x
-        echo "${{ matrix.platform.container.name }}"
-        echo "why run in if not == ''"
-        # git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-        # export PATH=`pwd`/depot_tools:"$PATH"
-        # depot_tools/gclient
-        # # ci/scripts/source_sync.sh
-        # fetch --no-history --nohooks webrtc
-        # gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
+        git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+        export PATH=`pwd`/depot_tools:"$PATH"
+        depot_tools/gclient
+        # ci/scripts/source_sync.sh
+        fetch --no-history --nohooks webrtc
+        gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
       if: ${{ matrix.platform.container.name == '' }}
       shell: bash
-    # - name: Download container
-    #   run: |
-    #     "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "${{ matrix.platform.container.dockerfile }}"
-    #   env:
-    #     DOCKER_REGISTRY: ${{ env.docker-registry }}
-    #     GITHUB_TOKEN: ${{ secrets.github_token }}
-    #   working-directory: ${{ env.docker-config-path }}
-    #   if: matrix.platform.container.name != ''
-    # - name: Build and test
-    #   run: |
-    #     export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
-    #     set +x
-    #     if [ -n "${{ matrix.platform.container.name }}" ]; then
-    #       docker run ${{ env.docker-registry-container-sha }} \
-    #       /bin/bash -c "cd src && /root/build/${{matrix.platform.os_type}}.sh"
-    #     else
-    #       cd src && ../ci/build/${{matrix.platform.os_type}}.sh
-    #     fi
-    #   shell: bash
+    - name: Download container
+      run: |
+        "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "${{ matrix.platform.container.dockerfile }}"
+      env:
+        DOCKER_REGISTRY: ${{ env.docker-registry }}
+        GITHUB_TOKEN: ${{ secrets.github_token }}
+      working-directory: ${{ env.docker-config-path }}
+      if: matrix.platform.container.name != ''
+    - name: Build and test
+      run: |
+        export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
+        set +x
+        if [ -n "${{ matrix.platform.container.name }}" ]; then
+          docker run ${{ env.docker-registry-container-sha }} \
+          /bin/bash -c "cd src && /root/build/${{matrix.platform.os_type}}.sh"
+        else
+          cd src && ../ci/build/${{matrix.platform.os_type}}.sh
+        fi
+      shell: bash
