@@ -69,11 +69,11 @@ jobs:
     strategy:
       matrix:
         platform:
-        - os_type: android
-          container:
-            name: bionic-webrtc
-            dockerfile: bionic
-          os: ubuntu-latest
+        # - os_type: android
+        #   container:
+        #     name: bionic-webrtc
+        #     dockerfile: bionic
+        #   os: ubuntu-latest
         # - os_type: ios-arm
         #   os: macOS-11.0
         #  os: ubuntu-latest
@@ -148,6 +148,7 @@ jobs:
     - name: Download container
       run: |
         pwd
+        docker images
         "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "docker/${{ matrix.platform.container.dockerfile }}"
       env:
         DOCKER_REGISTRY: ${{ env.docker-registry }}
