@@ -125,7 +125,7 @@ jobs:
     # - name: Setup QEMU
     #   run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
     #   if: matrix.platform.container.qemu == true
-      run: |
+    - run: |
         mkdir -p webrtc/src
     
     # - name: det source if not in container
