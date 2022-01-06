@@ -122,23 +122,21 @@ jobs:
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    # - name: Setup QEMU
-    #   run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
-    #   if: matrix.platform.container.qemu == true
-    - run: |
-        mkdir -p webrtc/src
-    
-    # - name: det source if not in container
-    #   run: |
-    #     # ci/scripts/get_dep.sh
-    #     git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-    #     export PATH=`pwd`/depot_tools:"$PATH"
-    #     depot_tools/gclient
-    #     # ci/scripts/source_sync.sh
-    #     fetch --no-history --nohooks webrtc
-    #     gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
-    #   shell: bash
-    #   if: ${{ matrix.platform.container.name }} == ''
+    - name: Setup QEMU
+      run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+      if: matrix.platform.container.qemu == true
+    - name: det source if not in container
+      run: |
+        # ci/scripts/get_dep.sh
+        git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+        export PATH=`pwd`/depot_tools:"$PATH"
+        ls
+        # depot_tools/gclient
+        # # ci/scripts/source_sync.sh
+        # fetch --no-history --nohooks webrtc
+        # gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
+      shell: bash
+      if: ${{ matrix.platform.container.name }} == ''
     # - name: Download container
     #   run: |
     #     "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "${{ matrix.platform.container.dockerfile }}"
@@ -159,6 +157,6 @@ jobs:
           ls
           # cd webrtc/src && ../../build/${{matrix.platform.os_type}}.sh
           echo 2
-          cd webrtc
+          cd depot_tools
         fi
       shell: bash
