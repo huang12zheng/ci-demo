@@ -151,14 +151,16 @@ jobs:
     #   working-directory: ${{ env.docker-config-path }}
     #   if: matrix.platform.container.name != ''
 
-    # - name: Build and test
-    #   run: |
-    #     export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
-
-    #     if [ -n "${{ matrix.platform.container.name }}" ]; then
-    #       docker run ${{ env.docker-registry-container-sha }} \
-    #       /bin/bash -c "cd webrtc/src && ../../build/${{matrix.platform.os_type}}.sh"
-    #     else
-    #       cd webrtc/src && ../../build/${{matrix.platform.os_type}}.sh
-    #     fi
-    #   shell: bash
+    - name: Build and test
+      run: |
+        export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
+        set +x
+        if [ -n "${{ matrix.platform.container.name }}" ]; then
+          # docker run ${{ env.docker-registry-container-sha }} \
+          # /bin/bash -c "cd webrtc/src && ../../build/${{matrix.platform.os_type}}.sh"
+          echo 1
+        else
+          # cd webrtc/src && ../../build/${{matrix.platform.os_type}}.sh
+          echo 2
+        fi
+      shell: bash
