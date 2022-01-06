@@ -69,9 +69,9 @@ jobs:
     strategy:
       matrix:
         platform:
-        - os_type: android
-          container:
-            name: bionic-webrtc
+        # - os_type: android
+        #   container:
+        #     name: bionic-webrtc
         # - os_type: ios-arm
         #   os: macOS-11.0
         # - os_type: ios-arm64
@@ -98,8 +98,8 @@ jobs:
         #   os: macOS-11.0
         # - os: macOS-11.0
         #   os_type: max-x64
-        # - os_type: win-x64
-        #   os: windows-latest
+        - os_type: win-x64
+          os: windows-latest
         # - os_type: win-x86
         #   os: windows-latest
         # - container:
