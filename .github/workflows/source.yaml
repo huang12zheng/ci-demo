@@ -152,7 +152,7 @@ jobs:
       env:
         DOCKER_REGISTRY: ${{ env.docker-registry }}
         GITHUB_TOKEN: ${{ secrets.github_token }}
-      working-directory: ${{ env.docker-config-path }}
+      working-directory: ${{ env.ci-config-path }}
       if: matrix.platform.container.name != ''
     - name: Build and test
       run: |
