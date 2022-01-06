@@ -108,33 +108,33 @@ jobs:
     #   if: matrix.platform.os == 'macOS-11.0'
     - run: |
         git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-        depot_tools/fetch --no-history --nohooks --with_branch_heads webrtc
-        depot_tools/gclient sync --no-history --nohooks
+        # depot_tools/fetch --no-history --nohooks --with_branch_heads webrtc
+        # depot_tools/gclient sync --no-history --nohooks
       if: ${{ matrix.platform.container.name }} == ''
 
-    - name: Setup QEMU
-      run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
-      if: matrix.platform.container.qemu == true
-    - name: Download container
-      run: |
-        "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "${{ matrix.platform.container.dockerfile }}"
-      env:
-        DOCKER_REGISTRY: ${{ env.docker-registry }}
-        GITHUB_TOKEN: ${{ secrets.github_token }}
-      working-directory: ${{ env.docker-config-path }}
-      if: matrix.platform.container.name != ''
-    - name: Build and test
-      run: |
-        export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
+    # - name: Setup QEMU
+    #   run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
+    #   if: matrix.platform.container.qemu == true
+    # - name: Download container
+    #   run: |
+    #     "${{ github.workspace }}/ci/getcontainer.sh" "${{ matrix.platform.container.name }}" "${{ matrix.platform.container.dockerfile }}"
+    #   env:
+    #     DOCKER_REGISTRY: ${{ env.docker-registry }}
+    #     GITHUB_TOKEN: ${{ secrets.github_token }}
+    #   working-directory: ${{ env.docker-config-path }}
+    #   if: matrix.platform.container.name != ''
+    # - name: Build and test
+    #   run: |
+    #     export GITTEST_NEGOTIATE_PASSWORD="${{ secrets.GITTEST_NEGOTIATE_PASSWORD }}"
 
-        if [ -n "${{ matrix.platform.container.name }}" ]; then
-          docker run \
-          ${{ env.docker-registry-container-sha }} \
-          /bin/bash -c ""
-        fi
-      shell: bash
-    - name: ios build
-      run: |
-        ../build/ios.sh
-      working-directory: webrtc
-      if: ${{ matrix.platform.os_type }} = ios
+    #     if [ -n "${{ matrix.platform.container.name }}" ]; then
+    #       docker run \
+    #       ${{ env.docker-registry-container-sha }} \
+    #       /bin/bash -c ""
+    #     fi
+    #   shell: bash
+    # - name: ios build
+    #   run: |
+    #     ../build/ios.sh
+    #   working-directory: webrtc
+    #   if: ${{ matrix.platform.os_type }} = ios
