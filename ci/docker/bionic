@@ -1,6 +1,7 @@
 ARG BASE=ubuntu:bionic
 FROM ${BASE} AS apt
-VOLUME scripts/ /root/scripts/
+COPY scripts/ /root/scripts/
 RUN /root/scripts/apt_install_x86_64.sh
 RUN /root/scripts/get_dep.sh
 RUN /root/scripts/source_sync.sh
+COPY build/ /root/build/
