@@ -152,7 +152,7 @@ jobs:
           docker run ${{ env.docker-registry-container-sha }} \
           /bin/bash -c "cd src && /root/build/${{matrix.platform.os_type}}.sh"
         else
-          ls
+          ll
           cd src && ../ci/build/${{matrix.platform.os_type}}.sh
         fi
       shell: bash
