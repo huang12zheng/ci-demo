@@ -127,17 +127,13 @@ jobs:
       if: matrix.platform.container.qemu == true
     - name: det source if not in container
       run: |
-        # git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
-        # # depot_tools/fetch --no-history --nohooks --with_branch_heads webrtc
-        # # depot_tools/gclient sync --no-history --nohooks
         # ci/scripts/get_dep.sh
         git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
         export PATH=`pwd`/depot_tools:"$PATH"
         depot_tools/gclient
         # ci/scripts/source_sync.sh
-        depot_tools/fetch --no-history --nohooks webrtc
-        cd webrtc
-        ../depot_tools/gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
+        fetch --no-history --nohooks webrtc
+        gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
       shell: bash
       if: ${{ matrix.platform.container.name }} == ''
     - name: Download container
