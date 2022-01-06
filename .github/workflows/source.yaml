@@ -122,6 +122,9 @@ jobs:
         set +x
         pwd
         bash -c "pwd"
+        mkdir aaaaa
+        mkdir aaaaa2
+        ls
       shell: bash
 
     - name: Check out repository
@@ -132,6 +135,7 @@ jobs:
         set +x
         pwd
         bash -c "pwd"
+        ls
       shell: bash
     # - name: Setup QEMU
     #   run: docker run --rm --privileged multiarch/qemu-user-static:register --reset
