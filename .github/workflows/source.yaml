@@ -132,6 +132,7 @@ jobs:
         # # depot_tools/gclient sync --no-history --nohooks
         # ci/scripts/get_dep.sh
         git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
+        export PATH=`pwd`/depot_tools:"$PATH"
         depot_tools/gclient
         # ci/scripts/source_sync.sh
         depot_tools/fetch --no-history --nohooks webrtc
