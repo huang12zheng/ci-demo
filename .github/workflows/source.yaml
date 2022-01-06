@@ -25,10 +25,10 @@ jobs:
         container:
         - name: bionic-webrtc
           dockerfile: bionic
-        - name: bionic-x86-webrtc
-          dockerfile: bionic
-          base: multiarch/ubuntu-core:x86-bionic
-          qemu: true
+        # - name: bionic-x86-webrtc
+        #   dockerfile: bionic
+        #   base: multiarch/ubuntu-core:x86-bionic
+        #   qemu: true
         - name: bionic-arm32-webrtc
           dockerfile: bionic-arm
           base: multiarch/ubuntu-core:armhf-bionic
@@ -95,23 +95,26 @@ jobs:
             name: bionic-x86-webrtc
         - os_type: max-arm64
           os: macOS-11.0
-        - os_type: max-x64
-          os: macOS-11.0
-        - os: windows-latest
-          os_type: win-x64
-        - os: windows-latest
-          os_type: win-x86
+        - os: macOS-11.0
+          os_type: max-x64
+        - os_type: win-x64
+          os: windows-latest
+        - os_type: win-x86
+          os: windows-latest
         - container:
             name: bionic-webrtc
-        - container:
-            name: bionic-x86-webrtc
-            qemu: true
+          os_type: linux-x64
+        # - container:
+        #     name: bionic-x86-webrtc
+        #     qemu: true
         - container:
             name: bionic-arm32-webrtc
             qemu: true
+          os_type: linux-arm
         - container:
             name: bionic-arm64-webrtc
             qemu: true
+          os_type: linux-arm64
     runs-on: ${{ matrix.platform.os }}
     steps:
     - name: Check out repository
