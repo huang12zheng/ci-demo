@@ -72,8 +72,8 @@ jobs:
         - os_type: android
           container:
             name: bionic-webrtc
+            dockerfile: bionic
           os: ubuntu-latest
-          dockerfile: bionic
         # - os_type: ios-arm
         #   os: macOS-11.0
         #  os: ubuntu-latest
@@ -90,18 +90,19 @@ jobs:
         # - os_type: linux-arm
         #   container:
         #     name: bionic-arm32-webrtc
-        #   dockerfile: bionic-arm
+        #     dockerfile: bionic-arm
         # - os_type: linux-arm64
         #   container:
         #     name: bionic-arm64-webrtc
-        #   dockerfile: bionic-arm
+        #     dockerfile: bionic-arm
         # - os_type: linux-x64
         #   container:
         #     name: bionic-webrtc
-        #   dockerfile: bionic
+        #     dockerfile: bionic
         # - os_type: linux-x86
         #   container:
         #     name: bionic-x86-webrtc
+        #     dockerfile: bionic
         # - os_type: max-arm64
         #   os: macOS-11.0
         # - os: macOS-11.0
