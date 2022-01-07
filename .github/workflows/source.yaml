@@ -139,6 +139,9 @@ jobs:
         # ci/scripts/get_dep.sh
         git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git
         export PATH=`pwd`/depot_tools:"$PATH"
+        if [ "${{ matrix.platform.os}}" == "windows-latest" ]; then
+          export DEPOT_TOOLS_WIN_TOOLCHAIN="0"
+        fi
         depot_tools/gclient
         # ci/scripts/source_sync.sh
         fetch --no-history --nohooks webrtc
