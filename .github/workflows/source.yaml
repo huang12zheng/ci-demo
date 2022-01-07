@@ -142,7 +142,7 @@ jobs:
         depot_tools/gclient
         # ci/scripts/source_sync.sh
         fetch --no-history --nohooks webrtc
-        gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
+        gclient sync -D --force --reset --with_branch_heads
       if: ${{ matrix.platform.container.name == '' }}
       shell: bash
     - name: Download container

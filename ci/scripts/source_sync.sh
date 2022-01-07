@@ -4,4 +4,4 @@ set -x
 export PATH=`pwd`/depot_tools:"$PATH"
 
 fetch --no-history --nohooks webrtc
-gclient sync -D --force --reset --with_branch_heads --no-history --nohooks
+gclient sync -D --force --reset --with_branch_heads
